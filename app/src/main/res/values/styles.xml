@@ -3,13 +3,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
     </style>
 
     <style name="Base.TextAppearance.AppCompat.Widget.ActionBar.TextTitle" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">@dimen/dp_20</item>
+        <item name="android:textSize">@dimen/sp_20</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Widget.ActionBar.TextTitleChild" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/sp_20</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Widget.ActionBar.TextChild" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 </resources>

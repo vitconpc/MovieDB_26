@@ -8,4 +8,8 @@
     <string name="framgnet_favorite">framgnet favorite</string>
     <string name="fragment_home">fragment home</string>
     <string name="title_app">Movie DB 26</string>
+    <string name="title_genres">Genres</string>
+    <string name="title_most_popular">Most Popular</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="title_top_rate">Top Rate</string>
 </resources>

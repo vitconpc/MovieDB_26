@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="genre"
+            type="vn.com.framgia.movie_db26.data.model.Genre" />
+        <variable
+            name="listener"
+            type="vn.com.framgia.movie_db26.screen.home.OnItemClickListener" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_8"
+        android:background="@drawable/background_text_genres"
+        android:onClick="@{()->listener.onClickItem(genre)}">
+
+        <TextView
+            android:id="@+id/text_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_12"
+            android:paddingStart="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_8"
+            android:text="@{genre.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="@color/color_neon_carrot"
+            android:textStyle="bold" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

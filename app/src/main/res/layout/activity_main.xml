@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
-
         <variable
             name="viewModel"
             type="vn.com.framgia.movie_db26.screen.main.MainViewModel" />
     </data>
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -61,6 +58,7 @@
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/navigation_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
