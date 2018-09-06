@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.com.framgia.movie_db26.R;
@@ -17,12 +18,17 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     public List<Film> mFilms;
     private OnItemFilmClickListener mListener;
 
-    public FilmAdapter(List<Film> films) {
-        this.mFilms = films;
+    public FilmAdapter() {
+        mFilms = new ArrayList<>();
     }
 
     public void setmListener(OnItemFilmClickListener listener) {
         this.mListener = listener;
+    }
+
+    public void setFilms(List<Film> films) {
+        mFilms.clear();
+        mFilms.addAll(films);
     }
 
     @NonNull

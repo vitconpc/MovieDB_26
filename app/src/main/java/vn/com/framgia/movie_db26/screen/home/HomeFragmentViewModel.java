@@ -15,10 +15,17 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import vn.com.framgia.movie_db26.R;
 import vn.com.framgia.movie_db26.data.model.Film;
+import vn.com.framgia.movie_db26.data.model.FilmResponse;
 import vn.com.framgia.movie_db26.data.model.Genre;
 import vn.com.framgia.movie_db26.data.model.GenresRespone;
 import vn.com.framgia.movie_db26.data.reponsitory.GenresRepository;
-import vn.com.framgia.movie_db26.data.source.remote.GenresRemoteDataSource;
+import vn.com.framgia.movie_db26.data.reponsitory.MostPopularRepository;
+import vn.com.framgia.movie_db26.data.reponsitory.TopRateRepository;
+import vn.com.framgia.movie_db26.data.reponsitory.UpcomingRepository;
+import vn.com.framgia.movie_db26.data.source.remote.GenresRemoteDataSourceImpl;
+import vn.com.framgia.movie_db26.data.source.remote.MostPopularRemoteDataSourceImpl;
+import vn.com.framgia.movie_db26.data.source.remote.TopRateRemoteDataSourceImpl;
+import vn.com.framgia.movie_db26.data.source.remote.UpcomingRemoteDataSourceImpl;
 import vn.com.framgia.movie_db26.screen.base.BaseViewModel;
 import vn.com.framgia.movie_db26.utils.rx.BaseSchedulerProvider;
 import vn.com.framgia.movie_db26.utils.rx.SchedulerProvider;
@@ -26,6 +33,7 @@ import vn.com.framgia.movie_db26.utils.rx.SchedulerProvider;
 public class HomeFragmentViewModel extends BaseObservable implements OnItemClickListener, View.OnClickListener
         , OnItemFilmClickListener, BaseViewModel {
 
+    private static final int PAGE_1 = 1;
     private CompositeDisposable mCompositeDisposable;
     private ViewPager mViewPager;
     private Context mContext;
@@ -34,6 +42,9 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
     private FilmAdapter mUpComingAdapter;
     private FilmAdapter mTopRateAdapter;
     private GenresRepository mGenresRepository;
+    private MostPopularRepository mMostPopularRepository;
+    private TopRateRepository mTopRateRepository;
+    private UpcomingRepository mUpcomingRepository;
     private BaseSchedulerProvider mSchedulerProvider;
 
     public HomeFragmentViewModel(Context context) {
@@ -44,7 +55,10 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
     private void setData() {
         //todo get data from remote
         mCompositeDisposable = new CompositeDisposable();
-        mGenresRepository = GenresRepository.getInstace(GenresRemoteDataSource.getInstance(mContext));
+        mGenresRepository = GenresRepository.getInstance(GenresRemoteDataSourceImpl.getInstance(mContext));
+        mMostPopularRepository = MostPopularRepository.getInstance(MostPopularRemoteDataSourceImpl.getInstance(mContext));
+        mTopRateRepository = TopRateRepository.getInstance(TopRateRemoteDataSourceImpl.getInstance(mContext));
+        mUpcomingRepository = UpcomingRepository.getInstance(UpcomingRemoteDataSourceImpl.getInstance(mContext));
         mSchedulerProvider = SchedulerProvider.getInstance();
         initAdapter();
         setListener();
@@ -53,10 +67,9 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
 
     private void initAdapter() {
         mGenresAdapter = new GenresAdapter();
-        List<Film> films = new ArrayList<>();
-        mTopRateAdapter = new FilmAdapter(films);
-        mUpComingAdapter = new FilmAdapter(films);
-        mMostPuparAdapter = new FilmAdapter(films);
+        mTopRateAdapter = new FilmAdapter();
+        mUpComingAdapter = new FilmAdapter();
+        mMostPuparAdapter = new FilmAdapter();
     }
 
     private void setListener() {
@@ -103,6 +116,63 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
 
     public void getData() {
         GetAllGenres();
+        GetMostPopular();
+        GetUpComing();
+        GetTopRate();
+    }
+
+    private void GetTopRate() {
+        Disposable disposable = mTopRateRepository.getTopRate(PAGE_1)
+                .subscribeOn(mSchedulerProvider.io())
+                .observeOn(mSchedulerProvider.ui())
+                .subscribe(new Consumer<FilmResponse>() {
+                    @Override
+                    public void accept(FilmResponse filmResponse) throws Exception {
+                        mTopRateAdapter.setFilms(filmResponse.getResults());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(mContext, R.string.error_network, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mCompositeDisposable.add(disposable);
+    }
+
+    private void GetUpComing() {
+        Disposable disposable = mUpcomingRepository.getUpcomming(PAGE_1)
+                .subscribeOn(mSchedulerProvider.io())
+                .observeOn(mSchedulerProvider.ui())
+                .subscribe(new Consumer<FilmResponse>() {
+                    @Override
+                    public void accept(FilmResponse filmResponse) throws Exception {
+                        mUpComingAdapter.setFilms(filmResponse.getResults());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(mContext, R.string.error_network, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mCompositeDisposable.add(disposable);
+    }
+
+    private void GetMostPopular() {
+        Disposable disposable = mMostPopularRepository.getListMostPopular(PAGE_1)
+                .subscribeOn(mSchedulerProvider.io())
+                .observeOn(mSchedulerProvider.ui())
+                .subscribe(new Consumer<FilmResponse>() {
+                    @Override
+                    public void accept(FilmResponse filmResponse) throws Exception {
+                        mMostPuparAdapter.setFilms(filmResponse.getResults());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(mContext, R.string.error_network, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mCompositeDisposable.add(disposable);
     }
 
     private void GetAllGenres() {

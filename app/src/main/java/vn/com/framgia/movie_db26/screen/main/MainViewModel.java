@@ -11,7 +11,7 @@ import vn.com.framgia.movie_db26.screen.base.BaseViewModel;
 import vn.com.framgia.movie_db26.screen.favorite.FavoriteFragment;
 import vn.com.framgia.movie_db26.screen.home.HomeFragment;
 
-public class MainViewModel extends BaseViewModel implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainViewModel implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     private FragmentManager mFragmentManager;
@@ -37,16 +37,6 @@ public class MainViewModel extends BaseViewModel implements BottomNavigationView
                 return true;
         }
         return false;
-    }
-
-    @Override
-    protected void onStart() {
-
-    }
-
-    @Override
-    protected void onStop() {
-
     }
 
     private void createFragment() {
