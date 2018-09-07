@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen.detail.DetailActivity"/>
+        <activity android:name=".screen.detail.DetailActivity" />
+        <activity android:name=".screen.youtube.YoutubeActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".screen.search.SearchActivity" />
     </application>
 
 </manifest>

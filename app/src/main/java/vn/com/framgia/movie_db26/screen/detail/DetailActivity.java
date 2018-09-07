@@ -16,7 +16,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityDetailBinding binding = DataBindingUtil.setContentView(
                 DetailActivity.this,R.layout.activity_detail);
-        mViewModel = new DetailViewModel(this);
+        mViewModel = new DetailViewModel(this,getIntent());
         binding.setViewModel(mViewModel);
     }
 

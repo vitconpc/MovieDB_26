@@ -1,9 +1,12 @@
 package vn.com.framgia.movie_db26.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BelongsToCollection {
+public class BelongsToCollection implements Parcelable {
     @SerializedName("id")
     @Expose
     private int mId;
@@ -16,6 +19,25 @@ public class BelongsToCollection {
     @SerializedName("backdrop_path")
     @Expose
     private String mBackdropPath;
+
+    protected BelongsToCollection(Parcel in) {
+        mId = in.readInt();
+        mName = in.readString();
+        mPosterPath = in.readString();
+        mBackdropPath = in.readString();
+    }
+
+    public static final Creator<BelongsToCollection> CREATOR = new Creator<BelongsToCollection>() {
+        @Override
+        public BelongsToCollection createFromParcel(Parcel in) {
+            return new BelongsToCollection(in);
+        }
+
+        @Override
+        public BelongsToCollection[] newArray(int size) {
+            return new BelongsToCollection[size];
+        }
+    };
 
     public int getId() {
         return mId;
@@ -47,5 +69,18 @@ public class BelongsToCollection {
 
     public void setBackdropPath(String backdropPath) {
         mBackdropPath = backdropPath;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
+        dest.writeString(mName);
+        dest.writeString(mPosterPath);
+        dest.writeString(mBackdropPath);
     }
 }

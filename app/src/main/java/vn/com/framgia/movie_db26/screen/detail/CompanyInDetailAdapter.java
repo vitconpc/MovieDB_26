@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.com.framgia.movie_db26.R;
@@ -19,6 +20,7 @@ public class CompanyInDetailAdapter extends RecyclerView.Adapter<
     private OnItemCompanyClickListener mListener;
 
     public CompanyInDetailAdapter() {
+        mCompanies = new ArrayList<>();
     }
 
     public void setCompanies(List<Company> companies) {

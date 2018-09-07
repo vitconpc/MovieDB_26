@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.com.framgia.movie_db26.R;
@@ -18,6 +19,7 @@ public class CastInDetailAdapter extends RecyclerView.Adapter<CastInDetailAdapte
     private OnClickCastItemListener mListener;
 
     public CastInDetailAdapter() {
+        mCasts = new ArrayList<>();
     }
 
     public void setCasts(List<Cast> casts) {
