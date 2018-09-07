@@ -24,7 +24,6 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
     }
 
     public GenresAdapter() {
-        mGenres = new ArrayList<>();
     }
 
     public void setListener(OnItemClickListener listener) {
@@ -62,7 +61,6 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
             if (genre != null) {
                 mBinding.setGenre(genre);
                 mBinding.setListener(mListener);
-                //todo continues
             }
         }
     }
