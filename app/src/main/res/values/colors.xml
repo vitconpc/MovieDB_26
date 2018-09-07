@@ -6,4 +6,6 @@
     <color name="color_silver">#cccaca</color>
     <color name="color_red">#FF0B00</color>
     <color name="color_neon_carrot">#ff922d</color>
+    <color name="color_oxford_blue">#3C4858</color>
+    <color name="color_search_item_overview">#969FAA</color>
 </resources>
