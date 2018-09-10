@@ -120,6 +120,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_search_item_rating_value" />
 
             <RatingBar
+                android:isIndicator="true"
                 android:rating="@{film.voteAverage/2}"
                 android:focusableInTouchMode="false"
                 android:clickable="false"
