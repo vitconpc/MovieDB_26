@@ -6,7 +6,7 @@ public class ApiUtils {
     private static final String BASE_URL = "https://api.themoviedb.org";
     private static NameAPI sInstance;
 
-    public static NameAPI getInstance(Context context){
+    public static synchronized NameAPI getInstance(Context context){
         if (sInstance == null){
             sInstance = RetrofitClient.createService(context,BASE_URL,NameAPI.class);
         }

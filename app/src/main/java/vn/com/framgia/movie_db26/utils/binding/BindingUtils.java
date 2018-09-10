@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -51,11 +52,10 @@ public class BindingUtils {
         recyclerView.setLayoutManager(manager);
     }
 
-    @BindingAdapter("recyclerAdapterGrid")
-    public static void setRecyclerAdapterGrid(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
-        recyclerView.setAdapter(adapter);
-        GridLayoutManager manager = new GridLayoutManager(recyclerView.getContext(), Constants.TWO);
-        recyclerView.setLayoutManager(manager);
+    @BindingAdapter({"setOnEditorAction"})
+    public static void setOnEditorAction(EditText editText
+                ,TextView.OnEditorActionListener listener) {
+        editText.setOnEditorActionListener(listener);
     }
 
     @BindingAdapter("setAvatar")
