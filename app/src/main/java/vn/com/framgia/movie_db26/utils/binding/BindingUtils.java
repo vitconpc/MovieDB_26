@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -48,8 +49,6 @@ public class BindingUtils {
         LinearLayoutManager manager = new LinearLayoutManager(recyclerView.getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
-        recyclerView.setNestedScrollingEnabled(true);
-        recyclerView.setHasFixedSize(true);
     }
 
     @BindingAdapter("recyclerAdapterGrid")
@@ -60,7 +59,7 @@ public class BindingUtils {
     }
 
     @BindingAdapter("setAvatar")
-    public static void setAvatarForImage(ImageView imageView,String url){
+    public static void setAvatarForImage(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(StringUtil.genUrlImage(url))
                 .apply(new RequestOptions().placeholder(R.drawable.not_load))
@@ -68,7 +67,12 @@ public class BindingUtils {
     }
 
     @BindingAdapter("initYoutube")
-    public static void initYoutube(YouTubePlayerView player, YouTubePlayer.OnInitializedListener listener){
-        player.initialize(BuildConfig.API_KEY_YOUTUBE,listener);
+    public static void initYoutube(YouTubePlayerView player, YouTubePlayer.OnInitializedListener listener) {
+        player.initialize(BuildConfig.API_KEY_YOUTUBE, listener);
+    }
+
+    @BindingAdapter("setGone")
+    public static void setGone(TextView view, int gone) {
+        view.setVisibility(gone);
     }
 }

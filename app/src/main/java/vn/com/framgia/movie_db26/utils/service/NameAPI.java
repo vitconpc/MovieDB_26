@@ -31,4 +31,8 @@ public interface NameAPI {
 
     @GET("/3/movie/{movie_id}/videos")
     Observable<TrailerResponse> getLisTrainer(@Path("movie_id") int movieId, @Query("api_key") String apiKey);
+
+    @GET("/3/discover/movie")
+    Observable<FilmResponse> getListByGenre(@Query("api_key") String apiKey, @Query("with_genres") int genre
+    ,@Query("page") int page);
 }

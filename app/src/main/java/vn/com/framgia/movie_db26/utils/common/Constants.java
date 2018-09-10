@@ -7,4 +7,6 @@ public class Constants {
     public static final String FILM_DETTAIL = "FILM_DETTAIL";
     public static final int TWO = 2;
     public static final String LISt_KEY = "LISt_KEY";
+    public static final int PAGE_1 = 1;
+    public static final String GENRE = "GENRE";
 }
