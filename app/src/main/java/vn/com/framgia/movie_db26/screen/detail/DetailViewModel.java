@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -25,6 +23,8 @@ import vn.com.framgia.movie_db26.data.reponsitory.FilmDetailRepository;
 import vn.com.framgia.movie_db26.data.reponsitory.ListCastRepository;
 import vn.com.framgia.movie_db26.data.reponsitory.TrailerRepository;
 import vn.com.framgia.movie_db26.screen.base.BaseViewModel;
+import vn.com.framgia.movie_db26.screen.cast.CastDetailActivity;
+import vn.com.framgia.movie_db26.screen.company.CompanyActivity;
 import vn.com.framgia.movie_db26.screen.youtube.YoutubeActivity;
 import vn.com.framgia.movie_db26.utils.common.Constants;
 import vn.com.framgia.movie_db26.utils.rx.BaseSchedulerProvider;
@@ -79,29 +79,31 @@ public class DetailViewModel implements OnClickCastItemListener
     private void setAdapter() {
         mCastInDetailAdapter = new CastInDetailAdapter();
         mCompanyInDetailAdapter = new CompanyInDetailAdapter();
-        castAdapter.set(mCastInDetailAdapter);
-        companyAdapter.set(mCompanyInDetailAdapter);
     }
 
     @Override
     public void onClickItem(Cast cast) {
-
+        Intent intent = new Intent(mContext, CastDetailActivity.class);
+        intent.putExtra(Constants.ID_CAST, cast.getId());
+        mContext.startActivity(intent);
     }
 
     @Override
     public void onClickItem(Company company) {
-
+        Intent intent = new Intent(mContext, CompanyActivity.class);
+        intent.putExtra(Constants.ID_COMPANY, company.getId());
+        mContext.startActivity(intent);
     }
 
-    public void goToPlay(View view){
+    public void goToPlay(View view) {
         ArrayList<String> videoKeys = new ArrayList<>();
         for (Trailer trailer : mTrailers) {
             videoKeys.add(trailer.getKey());
         }
         Intent intent = new Intent(mContext, YoutubeActivity.class);
-        intent.putParcelableArrayListExtra(Constants.LIST,mTrailers);
-        intent.putExtra(Constants.FILM_DETTAIL,filmDetail.get());
-        intent.putStringArrayListExtra(Constants.LISt_KEY,videoKeys);
+        intent.putParcelableArrayListExtra(Constants.LIST, mTrailers);
+        intent.putExtra(Constants.FILM_DETTAIL, filmDetail.get());
+        intent.putStringArrayListExtra(Constants.LISt_KEY, videoKeys);
         mContext.startActivity(intent);
     }
 
@@ -151,6 +153,7 @@ public class DetailViewModel implements OnClickCastItemListener
                     @Override
                     public void accept(CastResponse castResponse) throws Exception {
                         mCastInDetailAdapter.setCasts(castResponse.getCasts());
+                        castAdapter.set(mCastInDetailAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -170,6 +173,7 @@ public class DetailViewModel implements OnClickCastItemListener
                     public void accept(FilmDetail film) throws Exception {
                         filmDetail.set(film);
                         mCompanyInDetailAdapter.setCompanies(film.getCompanies());
+                        companyAdapter.set(mCompanyInDetailAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

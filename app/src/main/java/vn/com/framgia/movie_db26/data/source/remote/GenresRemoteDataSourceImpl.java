@@ -22,7 +22,7 @@ public class GenresRemoteDataSourceImpl implements GenresDataSource.GenresRemote
         return sGenresRemoteDataSource;
     }
 
-    public GenresRemoteDataSourceImpl(NameAPI nameAPI) {
+    private GenresRemoteDataSourceImpl(NameAPI nameAPI) {
         mNameAPI = nameAPI;
     }
 

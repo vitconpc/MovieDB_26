@@ -1,14 +1,11 @@
 package vn.com.framgia.movie_db26.screen.home;
 
 import android.content.Context;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import android.content.Intent;
+import android.databinding.ObservableField;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -27,16 +24,24 @@ import vn.com.framgia.movie_db26.data.source.remote.MostPopularRemoteDataSourceI
 import vn.com.framgia.movie_db26.data.source.remote.TopRateRemoteDataSourceImpl;
 import vn.com.framgia.movie_db26.data.source.remote.UpcomingRemoteDataSourceImpl;
 import vn.com.framgia.movie_db26.screen.base.BaseViewModel;
+import vn.com.framgia.movie_db26.screen.detail.DetailActivity;
+import vn.com.framgia.movie_db26.screen.list.FindGenresActivity;
+import vn.com.framgia.movie_db26.screen.search.SearchActivity;
+import vn.com.framgia.movie_db26.utils.common.Constants;
 import vn.com.framgia.movie_db26.utils.rx.BaseSchedulerProvider;
 import vn.com.framgia.movie_db26.utils.rx.SchedulerProvider;
 
-public class HomeFragmentViewModel extends BaseObservable implements OnItemClickListener, View.OnClickListener
+public class HomeFragmentViewModel implements OnItemClickListener, View.OnClickListener
         , OnItemFilmClickListener, BaseViewModel {
 
     private static final int PAGE_1 = 1;
     private CompositeDisposable mCompositeDisposable;
     private ViewPager mViewPager;
     private Context mContext;
+    public ObservableField<GenresAdapter> genresAdapter = new ObservableField<>();
+    public ObservableField<FilmAdapter> mostPopularAdapter = new ObservableField<>();
+    public ObservableField<FilmAdapter> upComingAdapter = new ObservableField<>();
+    public ObservableField<FilmAdapter> topRateAdapter = new ObservableField<>();
     private GenresAdapter mGenresAdapter;
     private FilmAdapter mMostPuparAdapter;
     private FilmAdapter mUpComingAdapter;
@@ -53,7 +58,6 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
     }
 
     private void setData() {
-        //todo get data from remote
         mCompositeDisposable = new CompositeDisposable();
         mGenresRepository = GenresRepository.getInstance(GenresRemoteDataSourceImpl.getInstance(mContext));
         mMostPopularRepository = MostPopularRepository.getInstance(MostPopularRemoteDataSourceImpl.getInstance(mContext));
@@ -62,7 +66,6 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
         mSchedulerProvider = SchedulerProvider.getInstance();
         initAdapter();
         setListener();
-        getData();
     }
 
     private void initAdapter() {
@@ -79,39 +82,24 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
         mUpComingAdapter.setmListener(this);
     }
 
-    @Bindable
-    public FilmAdapter getMostPuparAdapter() {
-        return mMostPuparAdapter;
-    }
-
-    @Bindable
-    public FilmAdapter getUpComingAdapter() {
-        return mUpComingAdapter;
-    }
-
-    @Bindable
-    public FilmAdapter getTopRateAdapter() {
-        return mTopRateAdapter;
-    }
-
-    @Bindable
-    public GenresAdapter getGenresAdapter() {
-        return mGenresAdapter;
-    }
-
     @Override
     public void onClickItem(Genre genre) {
-        //todo go to list screen
+        Intent intent = new Intent(mContext, FindGenresActivity.class);
+        intent.putExtra(Constants.GENRE, genre);
+        mContext.startActivity(intent);
     }
 
     @Override
     public void onClick(View v) {
-        //todo go to search screen
+        Intent intent = new Intent(mContext, SearchActivity.class);
+        mContext.startActivity(intent);
     }
 
     @Override
     public void onClickItem(Film film) {
-        //todo go to detail screen
+        Intent intent = new Intent(mContext, DetailActivity.class);
+        intent.putExtra(Constants.ID_FILM, film.getId());
+        mContext.startActivity(intent);
     }
 
     public void getData() {
@@ -129,6 +117,7 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
                     @Override
                     public void accept(FilmResponse filmResponse) throws Exception {
                         mTopRateAdapter.setFilms(filmResponse.getResults());
+                        topRateAdapter.set(mTopRateAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -147,6 +136,7 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
                     @Override
                     public void accept(FilmResponse filmResponse) throws Exception {
                         mUpComingAdapter.setFilms(filmResponse.getResults());
+                        upComingAdapter.set(mUpComingAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -165,6 +155,7 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
                     @Override
                     public void accept(FilmResponse filmResponse) throws Exception {
                         mMostPuparAdapter.setFilms(filmResponse.getResults());
+                        mostPopularAdapter.set(mMostPuparAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -183,6 +174,7 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
                     @Override
                     public void accept(GenresRespone genresRespone) throws Exception {
                         mGenresAdapter.setGenres(genresRespone.getGenres());
+                        genresAdapter.set(mGenresAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -195,7 +187,7 @@ public class HomeFragmentViewModel extends BaseObservable implements OnItemClick
 
     @Override
     public void onStart() {
-
+        getData();
     }
 
     @Override

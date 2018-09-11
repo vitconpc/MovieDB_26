@@ -11,7 +11,7 @@ public class ListCastRepository {
     private static ListCastRepository sInstance;
     private ListCastDataSource.ListCastRemoteDataSource mDataSource;
 
-    public ListCastRepository(Context context) {
+    private ListCastRepository(Context context) {
         mDataSource = ListCastRemoteDataSourceImpl.getInstance(context);
     }
 

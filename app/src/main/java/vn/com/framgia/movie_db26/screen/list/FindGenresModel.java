@@ -39,7 +39,6 @@ public class FindGenresModel implements OnItemFilmClickListener, BaseViewModel {
         mRepository = ListGenresRepository.getIntance(mContext);
         mCompositeDisposable = new CompositeDisposable();
         mGenresAdapter = new FindGenresAdapter();
-        findGenresAdapter.set(mGenresAdapter);
         Genre genre = intent.getParcelableExtra(Constants.GENRE);
         title.set(genre.getName());
         getList(genre.getId());
@@ -54,6 +53,7 @@ public class FindGenresModel implements OnItemFilmClickListener, BaseViewModel {
                     @Override
                     public void accept(FilmResponse filmResponse) throws Exception {
                         mGenresAdapter.setFilms(filmResponse.getResults());
+                        findGenresAdapter.set(mGenresAdapter);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

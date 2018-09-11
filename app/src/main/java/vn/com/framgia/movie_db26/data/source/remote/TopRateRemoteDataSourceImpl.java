@@ -14,7 +14,7 @@ public class TopRateRemoteDataSourceImpl implements TopRateDataSource.TopRateRem
     private static final String API_KEY = BuildConfig.API_KEY;
     private NameAPI mNameAPI;
 
-    public TopRateRemoteDataSourceImpl(NameAPI nameAPI) {
+    private TopRateRemoteDataSourceImpl(NameAPI nameAPI) {
         mNameAPI = nameAPI;
     }
 

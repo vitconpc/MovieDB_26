@@ -1,11 +1,14 @@
 package vn.com.framgia.movie_db26.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class FilmDetail {
+public class FilmDetail implements Parcelable {
     @SerializedName("adult")
     @Expose
     private boolean mAdult;
@@ -81,6 +84,41 @@ public class FilmDetail {
     @SerializedName("vote_count")
     @Expose
     private int mVoteCount;
+
+    protected FilmDetail(Parcel in) {
+        mAdult = in.readByte() != 0;
+        mBackdropPath = in.readString();
+        mBudget = in.readInt();
+        mHomepage = in.readString();
+        mId = in.readInt();
+        mImdbId = in.readString();
+        mOriginalLanguage = in.readString();
+        mOriginalTitle = in.readString();
+        mOverview = in.readString();
+        mPopularity = in.readDouble();
+        mPosterPath = in.readString();
+        mReleaseDate = in.readString();
+        mRevenue = in.readInt();
+        mRuntime = in.readInt();
+        mStatus = in.readString();
+        mTagline = in.readString();
+        mTitle = in.readString();
+        mVideo = in.readByte() != 0;
+        mVoteAverage = in.readFloat();
+        mVoteCount = in.readInt();
+    }
+
+    public static final Creator<FilmDetail> CREATOR = new Creator<FilmDetail>() {
+        @Override
+        public FilmDetail createFromParcel(Parcel in) {
+            return new FilmDetail(in);
+        }
+
+        @Override
+        public FilmDetail[] newArray(int size) {
+            return new FilmDetail[size];
+        }
+    };
 
     public boolean isAdult() {
         return mAdult;
@@ -280,5 +318,34 @@ public class FilmDetail {
 
     public void setVoteCount(int voteCount) {
         mVoteCount = voteCount;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (mAdult ? 1 : 0));
+        dest.writeString(mBackdropPath);
+        dest.writeInt(mBudget);
+        dest.writeString(mHomepage);
+        dest.writeInt(mId);
+        dest.writeString(mImdbId);
+        dest.writeString(mOriginalLanguage);
+        dest.writeString(mOriginalTitle);
+        dest.writeString(mOverview);
+        dest.writeDouble(mPopularity);
+        dest.writeString(mPosterPath);
+        dest.writeString(mReleaseDate);
+        dest.writeInt(mRevenue);
+        dest.writeInt(mRuntime);
+        dest.writeString(mStatus);
+        dest.writeString(mTagline);
+        dest.writeString(mTitle);
+        dest.writeByte((byte) (mVideo ? 1 : 0));
+        dest.writeFloat(mVoteAverage);
+        dest.writeInt(mVoteCount);
     }
 }

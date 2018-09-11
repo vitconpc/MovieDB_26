@@ -14,7 +14,7 @@ public class UpcomingRemoteDataSourceImpl implements UpcomingDataSource.Upcoming
     private static final String API_KEY = BuildConfig.API_KEY;
     private NameAPI mNameAPI;
 
-    public UpcomingRemoteDataSourceImpl(NameAPI nameAPI) {
+    private UpcomingRemoteDataSourceImpl(NameAPI nameAPI) {
         mNameAPI = nameAPI;
     }
 

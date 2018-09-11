@@ -8,7 +8,7 @@ public class TopRateRepository {
     private static TopRateRepository sInstance;
     private TopRateDataSource.TopRateRemoteDataSource mDataSource;
 
-    public TopRateRepository(TopRateDataSource.TopRateRemoteDataSource dataSource) {
+    private TopRateRepository(TopRateDataSource.TopRateRemoteDataSource dataSource) {
         mDataSource = dataSource;
     }
 

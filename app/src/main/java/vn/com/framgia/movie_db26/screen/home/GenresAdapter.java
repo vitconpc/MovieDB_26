@@ -24,6 +24,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
     }
 
     public GenresAdapter() {
+        mGenres = new ArrayList<>();
     }
 
     public void setListener(OnItemClickListener listener) {

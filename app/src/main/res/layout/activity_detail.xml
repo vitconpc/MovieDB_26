@@ -150,13 +150,13 @@
                     android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:ellipsize="end"
-                    android:maxLines="3"
                     android:text="@{viewModel.filmDetail.overview}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_ic_detail_release" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_ic_detail_release" >
+                    <requestFocus/>
+                </TextView>
 
                 <TextView
                     android:id="@+id/text_detail_casts_title"
@@ -224,6 +224,7 @@
                     app:layout_constraintTop_toTopOf="@+id/image_detail_backdrop" />
 
                 <ImageView
+                    android:onClick="@{viewModel::goToPlay}"
                     android:id="@+id/image_ic_detail_play"
                     android:layout_width="@dimen/dp_50"
                     android:layout_height="@dimen/dp_50"

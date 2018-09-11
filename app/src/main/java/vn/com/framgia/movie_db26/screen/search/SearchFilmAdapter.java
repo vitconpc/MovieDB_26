@@ -26,6 +26,7 @@ public class SearchFilmAdapter extends RecyclerView.Adapter<SearchFilmAdapter.Se
     public void setFilms(List<Film> films) {
         mFilms.clear();
         mFilms.addAll(films);
+        notifyDataSetChanged();
     }
 
     public void setListener(OnItemFilmClickListener listener) {

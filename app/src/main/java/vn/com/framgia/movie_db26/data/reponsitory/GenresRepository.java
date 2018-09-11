@@ -9,7 +9,7 @@ public class GenresRepository {
 
     private GenresDataSource.GenresRemoteDataSource mGenresRemoteDataSource;
 
-    public GenresRepository(GenresDataSource.GenresRemoteDataSource dataSource) {
+    private GenresRepository(GenresDataSource.GenresRemoteDataSource dataSource) {
         this.mGenresRemoteDataSource = dataSource;
     }
 

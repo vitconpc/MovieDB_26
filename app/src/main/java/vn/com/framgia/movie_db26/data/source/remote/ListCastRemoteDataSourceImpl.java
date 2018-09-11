@@ -16,7 +16,7 @@ public class ListCastRemoteDataSourceImpl implements
     private String API_KEY = BuildConfig.API_KEY;
     private NameAPI mNameAPI;
 
-    public ListCastRemoteDataSourceImpl(NameAPI nameAPI) {
+    private ListCastRemoteDataSourceImpl(NameAPI nameAPI) {
         mNameAPI = nameAPI;
     }
 

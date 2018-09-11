@@ -8,7 +8,7 @@ public class UpcomingRepository {
     private static UpcomingRepository sInstance;
     private UpcomingDataSource.UpcomingRemoteDataSource mDataSource;
 
-    public UpcomingRepository(UpcomingDataSource.UpcomingRemoteDataSource dataSource) {
+    private UpcomingRepository(UpcomingDataSource.UpcomingRemoteDataSource dataSource) {
         mDataSource = dataSource;
     }
 

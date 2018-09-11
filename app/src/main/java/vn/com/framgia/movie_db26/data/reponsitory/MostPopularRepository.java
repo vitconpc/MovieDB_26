@@ -8,7 +8,7 @@ public class MostPopularRepository {
     private static MostPopularRepository sInstance;
     private MostPopularDataSource.MostPopularRemoteDataSource mMostPopularRemoteDataSource;
 
-    public MostPopularRepository(MostPopularDataSource.MostPopularRemoteDataSource mostPopularRemoteDataSource) {
+    private MostPopularRepository(MostPopularDataSource.MostPopularRemoteDataSource mostPopularRemoteDataSource) {
         mMostPopularRemoteDataSource = mostPopularRemoteDataSource;
     }
 

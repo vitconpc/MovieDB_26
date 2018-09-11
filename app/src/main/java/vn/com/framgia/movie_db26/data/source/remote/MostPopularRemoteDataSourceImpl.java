@@ -15,7 +15,7 @@ public class MostPopularRemoteDataSourceImpl implements MostPopularDataSource.Mo
     private static final String API_KEY = BuildConfig.API_KEY;
     private NameAPI mNameAPI;
 
-    public MostPopularRemoteDataSourceImpl(NameAPI nameAPI) {
+    private MostPopularRemoteDataSourceImpl(NameAPI nameAPI) {
         mNameAPI = nameAPI;
     }
 
