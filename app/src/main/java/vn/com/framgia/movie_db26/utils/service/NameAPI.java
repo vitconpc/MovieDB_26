@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import vn.com.framgia.movie_db26.data.model.CastDetail;
 import vn.com.framgia.movie_db26.data.model.CastResponse;
 import vn.com.framgia.movie_db26.data.model.CompanyProfile;
 import vn.com.framgia.movie_db26.data.model.FilmDetail;
@@ -43,4 +44,7 @@ public interface NameAPI {
 
     @GET("/3/company/{company_id}")
     Observable<CompanyProfile> getCompany(@Path("company_id") int id, @Query("api_key") String apiKey);
+
+    @GET("/3/person/{person_id}")
+    Observable<CastDetail> getCastDetail(@Path("person_id") int id, @Query("api_key") String apiKey);
 }

@@ -10,4 +10,5 @@ public class Constants {
     public static final int PAGE_1 = 1;
     public static final String GENRE = "GENRE";
     public static final String ID_COMPANY = "ID_COMPANY";
+    public static final String ID_CAST = "ID_CAST";
 }
